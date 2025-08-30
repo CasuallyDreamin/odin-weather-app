@@ -1,6 +1,6 @@
 import { getWeather, displayWeather } from './weather.js';
 
-const apiKey = "11aca38e4a80563f0eae33df5f0a1a38";
+const apiKey = "put your open weather API key here";
 const form = document.getElementById("weatherForm");
 const cityInput = document.getElementById("cityInput");
 const weatherResult = document.getElementById("weatherResult");
