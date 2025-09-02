@@ -30,6 +30,38 @@ h1 {
   text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
 }
 
+/* Input field */
+input {
+    background-color: black;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 25px 0 0 25px; /* left rounded, right flat */
+    outline: none;
+}
+
+button {
+    padding: 10px 25px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 0 25px 25px 0;
+    background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+    color: #333; /* darker text */
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+}
+
+input:focus {
+  border-color: #fff;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+}
+
 #weatherResult h2 {
   font-size: 2.5rem;
   text-shadow: 1px 1px 6px rgba(0,0,0,0.6);
@@ -38,6 +70,26 @@ h1 {
 #weatherResult p {
   font-size: 1.2rem;
   text-shadow: 1px 1px 4px rgba(0,0,0,0.4);
+}
+
+.weather-card {
+  background: rgba(0,0,0,0.5);
+  padding: 15px 25px;
+  border-radius: 15px;
+  display: inline-block;
+  text-align: center;
+  margin-top: 20px;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+  color: #fff;
+}
+
+.weather-card h2 {
+  margin-bottom: 10px;
+}
+
+.weather-card p {
+  margin: 4px 0;
+  font-size: 1.1rem;
 }
 
 #weatherEffects {
@@ -143,23 +195,6 @@ h1 {
 @keyframes rotateRay {
   from { transform: rotate(var(--initial-rotate)); }
   to { transform: rotate(calc(var(--initial-rotate) + 360deg)); }
-}
-
-/* BUTTONS */
-button {
-  padding: 10px 25px;
-  font-size: 1rem;
-  border: none;
-  border-radius: 25px;
-  background: linear-gradient(45deg, #ff9a9e, #fad0c4);
-  color: #fff;
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-button:hover {
-  transform: scale(1.1);
-  box-shadow: 0 0 20px rgba(255,255,255,0.4);
 }
 
 .background-layer {

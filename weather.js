@@ -1,17 +1,14 @@
+import { createRain, createSnow, createClouds, createSunRays } from "./animations.js";
+
+
 // Mock weather API
 export async function getWeather(city, apiKey) {
-  const types = [
-    { main: "sunny", description: "Clear sky" },
-    { main: "rainy", description: "Light rain" },
-    { main: "snowy", description: "Snow flurries" },
-    { main: "cloudy", description: "Overcast clouds" }
-  ];
-  const random = types[Math.floor(Math.random() * types.length)];
-  return {
-    name: city,
-    main: { temp: Math.floor(Math.random() * 30) },
-    weather: [random]
-  };
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&appid=${apiKey}&units=metric`;
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`Network error: ${res.status}`);
+  const data = await res.json();
+  if (Number(data.cod) !== 200) throw new Error(data.message || "API error");
+  return data;
 }
 
 // Display weather + effects
@@ -21,12 +18,34 @@ export function displayWeather(data, resultContainer) {
   const description = data.weather[0].description;
   const cityName = data.name;
 
+  // extra fields
+  const feelsLike = data.main.feels_like;
+  const tempMin = data.main.temp_min;
+  const tempMax = data.main.temp_max;
+  const humidity = data.main.humidity;
+  const pressure = data.main.pressure;
+  const windSpeed = data.wind.speed;
+  const windDeg = data.wind.deg;
+  const visibility = data.visibility;
+  const cloudiness = data.clouds.all;
+
   resultContainer.innerHTML = `
-    <h2>${cityName}</h2>
-    <p>${description}</p>
-    <p>${temp} °C</p>
+    <div class="weather-card">
+      <h2>${cityName}</h2>
+      <p>${description}</p>
+      <p>Temperature: ${temp} °C</p>
+      <p>Feels like: ${feelsLike} °C</p>
+      <p>Min/Max: ${tempMin} °C / ${tempMax} °C</p>
+      <p>Humidity: ${humidity}%</p>
+      <p>Pressure: ${pressure} hPa</p>
+      <p>Wind: ${windSpeed} m/s at ${windDeg}°</p>
+      <p>Visibility: ${visibility / 1000} km</p>
+      <p>Cloudiness: ${cloudiness}%</p>
+    </div>
   `;
 
+
+  // --- existing smooth background and effects code below ---
   const effectsContainer = document.getElementById("weatherEffects");
   effectsContainer.innerHTML = "";
   effectsContainer.classList.remove("active");
@@ -45,9 +64,9 @@ export function displayWeather(data, resultContainer) {
   backgroundLayer.classList.add("active");
 
   setTimeout(() => {
-    document.body.style.background = bgGradient; // permanently apply
+    document.body.style.background = bgGradient;
     backgroundLayer.classList.remove("active");
-  }, 1600); // slightly longer than CSS transition
+  }, 1600);
 
   // --- WEATHER EFFECTS ---
   if (weather.includes("rain")) {
@@ -61,77 +80,4 @@ export function displayWeather(data, resultContainer) {
   }
 
   requestAnimationFrame(() => effectsContainer.classList.add("active"));
-}
-
-// RAIN
-function createRain(container, count) {
-  for (let i = 0; i < count; i++) {
-    const drop = document.createElement("div");
-    drop.className = "raindrop";
-    drop.style.left = Math.random() * 100 + "%";
-    drop.style.top = -300 - Math.random() * 50 + "px";
-    drop.style.height = 20 + Math.random() * 40 + "px";
-    drop.style.opacity = 0.4 + Math.random() * 0.4;
-    drop.style.animationDuration = 0.5 + Math.random() * 1.5 + "s";
-    drop.style.animationDelay = Math.random() * 2 + "s";
-    container.appendChild(drop);
-  }
-}
-
-// SNOW
-function createSnow(container, count) {
-  for (let i = 0; i < count; i++) {
-    const flake = document.createElement("div");
-    flake.className = "snowflake";
-    flake.style.left = Math.random() * 100 + "%";
-    flake.style.top = -300 - Math.random() * 50 + "px";
-    flake.style.width = 4 + Math.random() * 10 + "px";
-    flake.style.height = 4 + Math.random() * 10 + "px";
-    flake.style.opacity = 0.5 + Math.random() * 0.5;
-    flake.style.animationDuration = 4 + Math.random() * 6 + "s";
-    flake.style.animationDelay = Math.random() * 5 + "s";
-    container.appendChild(flake);
-  }
-}
-
-// CLOUDS
-function createClouds(container, count) {
-  for (let i = 0; i < count; i++) {
-    const cloud = document.createElement("div");
-    cloud.className = "cloud";
-    cloud.style.top = 50 + Math.random() * 200 + "px";
-    cloud.style.width = 200 + Math.random() * 200 + "px";
-    cloud.style.height = 80 + Math.random() * 50 + "px";
-    cloud.style.opacity = 0.5 + Math.random() * 0.5;
-    cloud.style.animationDuration = 60 + Math.random() * 60 + "s";
-    cloud.style.animationDelay = Math.random() * 30 + "s";
-    container.appendChild(cloud);
-
-    const mini = document.createElement("div");
-    mini.className = "cloud";
-    mini.style.top = cloud.style.top;
-    mini.style.width = cloud.offsetWidth * 0.6 + "px";
-    mini.style.height = cloud.offsetHeight * 0.6 + "px";
-    mini.style.opacity = 0.3 + Math.random() * 0.3;
-    mini.style.animationDuration = cloud.style.animationDuration;
-    mini.style.animationDelay = cloud.style.animationDelay;
-    container.appendChild(mini);
-  }
-}
-
-// SUNRAYS
-function createSunRays(container) {
-  const sun = document.createElement("div");
-  sun.className = "sun-rays";
-  for (let i = 0; i < 60; i++) {
-    const ray = document.createElement("div");
-    ray.className = "ray";
-    const initial = Math.random() * 360;
-    ray.style.setProperty('--initial-rotate', `${initial}deg`);
-    ray.style.animationDuration = (2 + Math.random() * 3) + 's';
-    ray.style.width = (1400 + Math.random() * 400) + 'px';
-    ray.style.opacity = 0.4 + Math.random() * 0.5;
-    sun.appendChild(ray);
-  }
-  container.appendChild(sun);
 }

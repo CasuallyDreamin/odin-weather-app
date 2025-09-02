@@ -14,7 +14,7 @@ form.addEventListener("submit", async (e) => {
         const data = await getWeather(city, apiKey);
         displayWeather(data, weatherResult);
     } catch (err) {
-        weatherResult.innerHTML = `<p>${err.message}</p>`;
+        weatherResult.innerHTML = `<p>City not found.</p>`;
         document.body.style.background = "#999"; // fallback
     }
 });
