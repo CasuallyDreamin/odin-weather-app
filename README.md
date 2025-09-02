@@ -1,77 +1,58 @@
-🌦️ Weather Status App
+# 🌦️ Weather Status App
 
-A simple web application that displays the current weather for a user-specified city.
-Built with HTML, CSS, and JavaScript, and powered by the OpenWeatherMap API.
+A simple web application that displays the current weather for a user-specified city.  
+Built with **HTML, CSS, and JavaScript**, and powered by the **OpenWeatherMap API**.
 
-✨ Features
+## ✨ Features
+- 🔍 Search for weather by city name  
+- 🌡️ Displays **temperature** and **current weather status**  
+- ☁️ Provides a brief description (e.g., *"sunny"*, *"cloudy"*)  
+- ⚡ Dynamically updates the user interface with real-time data  
 
-🔍 Search for weather by city name
+## 🚀 Getting Started
 
-🌡️ Displays temperature and current weather status
+### ✅ Prerequisites
+- A modern web browser  
 
-☁️ Provides a brief description (e.g., "sunny", "cloudy")
+### 📦 Installation
+1. Clone the repository  
+2. Navigate to the project directory  
+3. Run a local server in the base directory (e.g., **VS Code Live Server**)  
 
-⚡ Dynamically updates the user interface with real-time data
+## 🔑 API Key Setup
+This project requires an **OpenWeatherMap API key**.  
 
-🚀 Getting Started
-✅ Prerequisites
+1. Sign up for a free account at [OpenWeatherMap](https://openweathermap.org).  
+2. Go to the **"API keys"** tab to find your personal key.  
+3. Open the `script.js` file in a text editor.  
+4. Replace the placeholder with your key:  
 
-A modern web browser
-
-📦 Installation
-
-Clone the repository
-
-Navigate to the project directory
-
-Run a local server in the base directory (e.g., VS Code Live Server)
-
-🔑 API Key Setup
-
-This project requires an OpenWeatherMap API key.
-
-Sign up for a free account at OpenWeatherMap
-.
-
-Go to the "API keys" tab to find your personal key.
-
-Open the script.js file in a text editor.
-
-Replace the placeholder with your key:
-
+```js
 const apiKey = "YOUR_API_KEY_HERE";
+```
 
-🖥️ Usage
+## 🖥️ Usage
+1. Open the app in your browser  
+2. Enter a city name in the search bar  
+3. Press **Enter** or click the **Search** button  
+4. View the current weather instantly  
 
-Open the app in your browser
-
-Enter a city name in the search bar
-
-Press Enter or click the Search button
-
-View the current weather instantly
-
-📂 Project Structure
+## 📂 Project Structure
+```
 ├── index.html    # Main HTML file
 ├── style.css     # Styles for the app
 ├── script.js     # Main driver script
 └── weather.js    # Handles API requests & DOM updates
+```
 
-🤝 Contributing
+## 🤝 Contributing
+- Fork the repository  
+- Create your feature branch (`git checkout -b feature/YourFeature`)  
+- Commit your changes (`git commit -m "Add some feature"`)  
+- Push to the branch (`git push origin feature/YourFeature`)  
+- Open a Pull Request  
 
-Fork the repository
+For major changes, please open an **issue** first to discuss your ideas.  
 
-Create your feature branch (git checkout -b feature/YourFeature)
-
-Commit your changes (git commit -m "Add some feature")
-
-Push to the branch (git push origin feature/YourFeature)
-
-Open a Pull Request
-
-For major changes, please open an issue first to discuss your ideas.
-
-📜 License
-
-This project is licensed under the MIT License – see the LICENSE.md
- file for details.
+## 📜 License
+This project is licensed under the **MIT License** – see the [LICENSE.md](LICENSE.md) file for details.
